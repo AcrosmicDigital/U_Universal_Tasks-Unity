@@ -1,0 +1,18 @@
+{
+    "name": "U.Universal.Tasks.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:d0e858af833a3ee40bf0c3fa79badf06"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
