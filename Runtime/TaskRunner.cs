@@ -21,19 +21,19 @@
 namespace U.Universal.Tasks
 {
 
-    public sealed class MonoHost
+    internal sealed class TaskRunner
     {
         // <Singleton Pattern>
-        private readonly static MonoHost _instance = new MonoHost();
-        private MonoHost() { }
-        public static MonoHost Instance { get => _instance; }
+        private readonly static TaskRunner _instance = new TaskRunner();
+        private TaskRunner() { }
+        internal static TaskRunner Instance { get => _instance; }
         // </Singleton Pattern>
 
 
 
         // MonoHostInDontDestroyOnLoad
         private GameObject inDontDestroyonLoad = null;
-        public GameObject InDontDestroyonLoad
+        internal GameObject InDontDestroyonLoad
         {
             get
             {
@@ -52,7 +52,7 @@ namespace U.Universal.Tasks
 
         // MonoHostInActiveScene
         private GameObject inActiveScene = null;
-        public GameObject InActiveScene
+        internal GameObject InActiveScene
         {
             get
             {
@@ -65,20 +65,6 @@ namespace U.Universal.Tasks
                 return inActiveScene;
 
             }
-        }
-
-
-
-        public static GameObject NewHostInActiveScene(string name)
-        {
-            return new GameObject(name);
-        }
-
-        public static GameObject NewHostInDontDestroyOnLoad(string name)
-        {
-            var go = new GameObject(name);
-            UnityEngine.Object.DontDestroyOnLoad(go);
-            return go;
         }
 
     }
