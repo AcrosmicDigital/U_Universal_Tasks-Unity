@@ -13,7 +13,7 @@ namespace U.Universal.Tasks
     public static class TaskExtension
     {
 
-        public static async void Then(this Task task, Action<Exception> Reject = null, Action Resolve = null, Action Finally = null)
+        public static async void Then(this Task task, Action<Exception> Reject, Action Resolve, Action Finally)
         {
             
             try
@@ -31,7 +31,7 @@ namespace U.Universal.Tasks
             }
         }
 
-        public static async void Then<TResult>(this Task<TResult> task, Action<Exception> Reject = null, Action<TResult> Resolve = null, Action Finally = null)
+        public static async void Then<TResult>(this Task<TResult> task, Action<Exception> Reject, Action<TResult> Resolve, Action Finally)
         {
 
             try
@@ -60,6 +60,15 @@ namespace U.Universal.Tasks
                 throw task.Exception;
 
         }
+
+
+
+
+
+        public static void Resolve(this Task task, Action Resolve) => task.Then((e) => { }, Resolve, () => { });
+        public static void Resolve<TResult>(this Task<TResult> task, Action<TResult> Resolve) => task.Then<TResult>((e) => { }, Resolve, () => { });
+        public static void Reject(this Task task, Action<Exception> Reject) => task.Then(Reject, () => { }, () => { });
+        public static void Finally(this Task task, Action Finally) => task.Then((e) => { }, () => { }, Finally);
 
 
     }
