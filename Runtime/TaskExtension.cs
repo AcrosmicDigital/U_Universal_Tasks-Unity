@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Collections;
-
+using UnityEngine;
 
 namespace U.Universal.Tasks
 {
@@ -68,7 +68,11 @@ namespace U.Universal.Tasks
         public static void Resolve(this Task task, Action Resolve) => task.Then((e) => { }, Resolve, () => { });
         public static void Resolve<TResult>(this Task<TResult> task, Action<TResult> Resolve) => task.Then<TResult>((e) => { }, Resolve, () => { });
         public static void Reject(this Task task, Action<Exception> Reject) => task.Then(Reject, () => { }, () => { });
+        public static void Reject<TResult>(this Task<TResult> task, Action<Exception> Reject) => task.Then<TResult>(Reject, (r) => { }, () => { });
+        public static void RejectPrintError(this Task task) => task.Then((e) => Debug.Log(e), () => { }, () => { });
+        public static void RejectPrintError<TResult>(this Task<TResult> task) => task.Then<TResult>((e) => Debug.Log(e), (r) => { }, () => { });
         public static void Finally(this Task task, Action Finally) => task.Then((e) => { }, () => { }, Finally);
+        public static void Finally<TResult>(this Task<TResult> task, Action Finally) => task.Then<TResult>((e) => { }, (r) => { }, Finally);
 
 
     }
